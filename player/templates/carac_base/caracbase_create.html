@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+    {% if player != profil_initial%}
+    <h1> {{user.username.upper}} vous souhaitez créer les caracteristiques de base de votre personnage</h1>
+    
+    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+    {% csrf_token %}
+        <p> Création des Caracteristiques de base </p>
+            <table class="add-new-ticket">
+                {{form.as_table}}
+            </table>
+            <input class="valid-ticket"type="submit" value="Validez vos caracteristiques de base">
+    </form>
+    <a class="" href="{% url 'playeur:liste_personnages' %}" >Retour page principale</a>
+    {% else %}
+    <h3>Profil intial déjà crée!</h3>
+    <a class="" href="{% url 'playeur:liste_personnages' %}" >Retour page principale</a>
+    {% endif %}
+</div>
+{% endblock %}  

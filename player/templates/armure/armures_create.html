@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1> {{user.username.upper}} vous souhaitez ajouter une armure de votre personnage</h1>
+    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+    {% csrf_token %}
+        <p> Création armure </p>
+            <table class="add-new-ticket">
+                {{form.as_table}}
+            </table>
+            <input class="valid-ticket"type="submit" value="Validez votre armure">
+    </form>
+    <a class="" href="{% url 'playeur:details_personnage' pk=player.id%}" >Retour page profil</a>
+</div>
+{% endblock %}  

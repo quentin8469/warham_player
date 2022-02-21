@@ -1,0 +1,18 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1> {{user.username.upper}} vous souhaitez créer un personnage</h1>
+    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+    {% csrf_token %}
+        <p> Création de personnage </p>
+            <table class="add-new-ticket">
+                
+                {{form.as_table}}
+            </table>
+            <input class="valid-ticket" type="submit" value="Validez votre personnage">
+    </form>
+    <a class="" href="{% url 'playeur:liste_personnages'  %}" >Retour page liste</a>
+</div>
+{% endblock %}  

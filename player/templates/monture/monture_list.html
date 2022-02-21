@@ -1,0 +1,90 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link"  href="{% url 'playeur:details_personnage' pk=player.id %}">Profil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'playeur:description' pk=player.id %}">Description</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'playeur:magie' pk=player.id %}">Magies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:competences' pk=player.id %}">Competences</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:equipements' pk=player.id %}">Equipements</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:morts_tuer' pk=player.id %}">Notes & Morts tués</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'playeur:montures' pk=player.id %}">Montures</a>
+            </li>
+        </ul> 
+        
+        <div class="container">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                              <a class="nav-link active" aria-current="page" href="{% url 'playeur:nouvelle_montures' pk=player.id %}">ajouter monture</a>
+                            </li>
+                        </ul> 
+                    </th>
+                    <th scope="col">M</th>
+                    <th scope="col">CC</th>
+                    <th scope="col">CT</th>
+                    <th scope="col">F</th>
+                    <th scope="col">E</th>
+                    <th scope="col">B</th>
+                    <th scope="col">I</th>
+                    <th scope="col">A</th>
+                    <th scope="col">Dex</th>
+                    <th scope="col">Cd</th>
+                    <th scope="col">Int</th>
+                    <th scope="col">Cl</th>
+                    <th scope="col">FM</th>
+                    <th scope="col">Soc</th>
+                    <th scope="col">modifier</th>
+                    <th scope="col">supprimer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for monture in montures %}
+                  <tr class="table-secondary">
+                    {% if monture.nom %}
+                    <th> {{ monture.nom }}</th>
+                    {% else %}
+                    <th> Monture sans nom</th>
+                    {% endif %}
+                    <td>{{ monture.mouvement }}</td>
+                    <td>{{ monture.capacite_combat }}</td>
+                    <td>{{ monture.capacité_tir }}</td>
+                    <td>{{ monture.force }}</td>
+                    <td>{{ monture.endurance }}</td>
+                    <td>{{ monture.point_blessure }}</td>
+                    <td>{{ monture.initiative }}</td>
+                    <td>{{ monture.nb_attaque }}</td>
+                    <td>{{ monture.dexterite }}</td>
+                    <td>{{ monture.commandement }}</td>
+                    <td>{{ monture.intelligence }}</td>
+                    <td>{{ monture.calme }}</td>
+                    <td>{{ monture.force_mentale }}</td>
+                    <td>{{ monture.sociabilite }}</td>
+                    <td><a class="nav-link active" aria-current="page" href="{% url 'playeur:editter_montures' pk=monture.id %}">modifier</a></td>
+                    <td><a class="nav-link active" aria-current="page" href="{% url 'playeur:effacer_montures' pk=monture.id %}">supprimer</a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+  {% endblock %}  

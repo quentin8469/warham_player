@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="album py-2 bg-light">
+    <div class="container "> 
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 ">
+            {% for player in players %}          
+            <div class="col">
+                <div class="card shadow-sm" >
+                    {% if player.photo %}
+                        <img src="{{ player.photo.url }}" class="w-50 p-3" alt="Image">
+                    {% endif %}
+                    <div class="card-body">
+                        <p class="card-text">{{ player.nom }} </p>
+                        <p class="card-text">{{ player.carriere_actuelle }} </p>
+                        <p class="card-text">{{ player.joueur.username }} </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'playeur:details_personnage' pk=player.id %}">View player</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'playeur:creation_carac_base' pk=player.id %}">Edit profil intial</a>    
+                            </div>                            
+                        </div>
+                        <small class="text-muted">{{ player.date_creation }}</small>
+                    </div>
+                </div>
+            </div>            
+            {% endfor %}
+        </div> 
+    </div>
+  </div>
+  {% endif %}
+  {% endblock %}  

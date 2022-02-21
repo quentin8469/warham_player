@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1> {{user.username.upper}} vous souhaitez effacer  votre monture</h1>
+    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+    {% csrf_token %}
+        
+        <p>Voulez-vous supprimer cette monture: {{ monture.nom }} ? </p> 
+            <input class="valid-ticket"type="submit" value="Validez la suppression de votre monture">
+    </form>
+    <a class="" href="{% url 'playeur:montures' pk=monture.player.id %}" >Retour page monture</a>
+</div>
+{% endblock %}  
