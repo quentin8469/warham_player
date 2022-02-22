@@ -12,11 +12,11 @@ from account.models import CustomUser
 class SignUpView(CreateView):
     form_class = NewUserForm
     template_name = "signup/signup.html"
-    success_url = '/accounts/'
+    success_url = '/login/'
 
 
 class LogoutView(LogoutView):
-    next_page = '/accounts/'
+    next_page = '/login/'
 
     
 class LoginView(LoginView):
