@@ -8,15 +8,15 @@
             <div class="d-grid gap-1">
                 {% csrf_token %}
                 <div class="mb-3">
-                    {% for input in form %}
+                    
                         <div class="py-1">
-                         {{ input }}
+                         {{ form.as_p }}
                         </div>
-                     {% endfor %}
+                    
                 </div>
             </div>
             <div>
-                <a href="" class="btn btn-outline-primary">Retourner accueil</a>
+                <a href="{% url 'account:connexion' %}" class="btn btn-outline-primary">Retourner accueil</a>
                 <input type="submit" class="btn btn-primary" value="S'inscrire"/>
             </div>
         </form>
