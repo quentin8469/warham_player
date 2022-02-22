@@ -2,64 +2,65 @@
 {% load static %}
 
 {% block content %}
+{% if user.is_authenticated %}
 
+  <div class="container">
+      <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'playeur:details_personnage' pk=player.id %}">Profil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'playeur:description' pk=player.id %}">Description</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'playeur:magie' pk=player.id %}">Magies</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'playeur:competences' pk=player.id %}">Competences</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'playeur:equipements' pk=player.id %}">Equipements</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'playeur:morts_tuer' pk=player.id %}">Notes & Morts tués</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'playeur:montures' pk=player.id %}">Montures</a>
+          </li>
+      </ul> 
 
-<div class="container">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'playeur:details_personnage' pk=player.id %}">Profil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'playeur:description' pk=player.id %}">Description</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'playeur:magie' pk=player.id %}">Magies</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:competences' pk=player.id %}">Competences</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'playeur:equipements' pk=player.id %}">Equipements</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:morts_tuer' pk=player.id %}">Notes & Morts tués</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:montures' pk=player.id %}">Montures</a>
-        </li>
-    </ul> 
-
-<div class="container">
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="{% url 'playeur:nouvel_equipement' pk=player.id %}">ajouter equipement</a>
-                    </li>
-                </ul> 
-            </th>
-            <th scope="col">Quantite</th>
-            <th scope="col">Encombrement</th>
-            <th scope="col">Note</th>
-            <th scope="col">modifier</th>
-            <th scope="col">supprimer</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for equipement in equipements %}
-          <tr class="table-secondary">
-            <th>{{ equipement.nom }}</th>
-            <td>{{ equipement.quantite }}</td>
-            <td>{{ equipement.encombrement }}</td>
-            <td>{{ equipement.note }}</td>
-            <td><a class="nav-link active" aria-current="page" href="{% url 'playeur:editter_equipement' pk=equipement.id %}">modifier</a></td>
-            <td><a class="nav-link active" aria-current="page" href="{% url 'playeur:effacer_equipement' pk=equipement.id %}">supprimer</a></td>
-          </tr>
-        {% endfor %}
-        <tbody> 
-    </table>
-</div>
-
+      <div class="container">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="{% url 'playeur:nouvel_equipement' pk=player.id %}">ajouter equipement</a>
+                        </li>
+                    </ul> 
+                </th>
+                <th scope="col">Quantite</th>
+                <th scope="col">Encombrement</th>
+                <th scope="col">Note</th>
+                <th scope="col">modifier</th>
+                <th scope="col">supprimer</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for equipement in equipements %}
+              <tr class="table-secondary">
+                <th>{{ equipement.nom }}</th>
+                <td>{{ equipement.quantite }}</td>
+                <td>{{ equipement.encombrement }}</td>
+                <td>{{ equipement.note }}</td>
+                <td><a class="nav-link active" aria-current="page" href="{% url 'playeur:editter_equipement' pk=equipement.id %}">modifier</a></td>
+                <td><a class="nav-link active" aria-current="page" href="{% url 'playeur:effacer_equipement' pk=equipement.id %}">supprimer</a></td>
+              </tr>
+            {% endfor %}
+            <tbody> 
+        </table>
+      </div>
+  </div>
+{% endif %}
 {% endblock %}  

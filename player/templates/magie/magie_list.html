@@ -3,344 +3,343 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+            <a class="nav-link " href="{% url 'playeur:details_personnage' pk=player.id %}">Profil</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'playeur:description' pk=player.id %}">Description</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'playeur:magie' pk=player.id %}">Magies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:competences' pk=player.id %}">Competences</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:equipements' pk=player.id %}">Equipements</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:morts_tuer' pk=player.id %}">Notes & Morts tués</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:montures' pk=player.id %}">Montures</a>
+            </li>
+        </ul> 
 
-<div class="container">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link " href="{% url 'playeur:details_personnage' pk=player.id %}">Profil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'playeur:description' pk=player.id %}">Description</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'playeur:magie' pk=player.id %}">Magies</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:competences' pk=player.id %}">Competences</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:equipements' pk=player.id %}">Equipements</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:morts_tuer' pk=player.id %}">Notes & Morts tués</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:montures' pk=player.id %}">Montures</a>
-        </li>
-    </ul> 
-
-<div class="container">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'playeur:nouveau_sort' pk=player.id %}">ajouter sortilege</a>
-        </li>
-    </ul>
-    
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Nom: Magie mineure
-                </button>
-            </h2>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'playeur:nouveau_sort' pk=player.id %}">ajouter sortilege</a>
+                </li>
+            </ul>
         
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {% for magie_mineur in magies_mineurs %}
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom: {{ magie_mineur.nom }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_mineur.niveau_sort }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_mineur.point_magie }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_mineur.porte }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_mineur.duree }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_mineur.degats }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_mineur.composants }}</h6>
-                            <h6 class="card-title">Description du sort:</h6>
-                            <p class="card-text">{{ magie_mineur.description_sort }}</p>
-                            <h6 class="card-title">Description de l'incantation:</h6>
-                            <p class="card-text">{{ magie_mineur.incantation }}</p>
-                            <div class="card-footer text-muted">
-                                <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_mineur.apprentissage }}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_mineur.cout_xp }}</h6>
-                                <a href="{% url 'playeur:editter_sort' pk=magie_mineur.id %}" class="btn btn-primary">modifier</a>
-                                <a href="{% url 'playeur:effacer_sort' pk=magie_mineur.id %}" class="btn btn-danger">supprimer</a>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nom: Magie mineure
+                        </button>
+                    </h2>
+                
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for magie_mineur in magies_mineurs %}
+                            <div class="card" style="width: 60rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom: {{ magie_mineur.nom }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_mineur.niveau_sort }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_mineur.point_magie }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_mineur.porte }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_mineur.duree }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_mineur.degats }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_mineur.composants }}</h6>
+                                    <h6 class="card-title">Description du sort:</h6>
+                                    <p class="card-text">{{ magie_mineur.description_sort }}</p>
+                                    <h6 class="card-title">Description de l'incantation:</h6>
+                                    <p class="card-text">{{ magie_mineur.incantation }}</p>
+                                    <div class="card-footer text-muted">
+                                        <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_mineur.apprentissage }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_mineur.cout_xp }}</h6>
+                                        <a href="{% url 'playeur:editter_sort' pk=magie_mineur.id %}" class="btn btn-primary">modifier</a>
+                                        <a href="{% url 'playeur:effacer_sort' pk=magie_mineur.id %}" class="btn btn-danger">supprimer</a>
+                                    </div>
+                                </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
-                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nom: Magie Bataille
+                        </button>
+                    </h2>
+                
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for magie_bataille in magies_batailles %}
+                            <div class="card" style="width: 60rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom: {{ magie_bataille.nom }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_bataille.niveau_sort }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_bataille.point_magie }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_bataille.porte }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_bataille.duree }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_bataille.degats }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_bataille.composants }}</h6>
+                                    <h6 class="card-title">Description du sort:</h6>
+                                    <p class="card-text">{{ magie_bataille.description_sort }}</p>
+                                    <h6 class="card-title">Description de l'incantation:</h6>
+                                    <p class="card-text">{{ magie_bataille.incantation }}</p>
+                                    <div class="card-footer text-muted">
+                                        <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_bataille.apprentissage }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_bataille.cout_xp }}</h6>
+                                        <a href="{% url 'playeur:editter_sort' pk=magie_bataille.id %}" class="btn btn-primary">modifier</a>
+                                        <a href="{% url 'playeur:effacer_sort' pk=magie_bataille.id %}" class="btn btn-danger">supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nom: Magie Druidique
+                        </button>
+                    </h2>
+                
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for magie_druidique in magies_druidiques %}
+                            <div class="card" style="width: 60rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom: {{ magie_druidique.nom }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_druidique.niveau_sort }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_druidique.point_magie }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_druidique.porte }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_druidique.duree }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_druidique.degats }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_druidique.composants }}</h6>
+                                    <h6 class="card-title">Description du sort:</h6>
+                                    <p class="card-text">{{ magie_druidique.description_sort }}</p>
+                                    <h6 class="card-title">Description de l'incantation:</h6>
+                                    <p class="card-text">{{ magie_druidique.incantation }}</p>
+                                    <div class="card-footer text-muted">
+                                        <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_druidique.apprentissage }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_druidique.cout_xp }}</h6>
+                                        <a href="{% url 'playeur:editter_sort' pk=magie_druidique.id %}" class="btn btn-primary">modifier</a>
+                                        <a href="{% url 'playeur:effacer_sort' pk=magie_druidique.id %}" class="btn btn-danger">supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nom: Magie Elementaire
+                        </button>
+                    </h2>
+                
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for magie_elementaire in magies_elementaires %}
+                            <div class="card" style="width: 60rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom: {{ magie_elementaire.nom }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_elementaire.niveau_sort }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_elementaire.point_magie }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_elementaire.porte }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_elementaire.duree }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_elementaire.degats }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_elementaire.composants }}</h6>
+                                    <h6 class="card-title">Description du sort:</h6>
+                                    <p class="card-text">{{ magie_elementaire.description_sort }}</p>
+                                    <h6 class="card-title">Description de l'incantation:</h6>
+                                    <p class="card-text">{{ magie_elementaire.incantation }}</p>
+                                    <div class="card-footer text-muted">
+                                        <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_elementaire.apprentissage }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_elementaire.cout_xp }}</h6>
+                                        <a href="{% url 'playeur:editter_sort' pk=magie_elementaire.id %}" class="btn btn-primary">modifier</a>
+                                        <a href="{% url 'playeur:effacer_sort' pk=magie_elementaire.id %}" class="btn btn-danger">supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nom: Magie Illusoire
+                        </button>
+                    </h2>
+                
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for magie_illusoire in magies_illusoires %}
+                            <div class="card" style="width: 60rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom: {{ magie_illusoire.nom }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_illusoire.niveau_sort }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_illusoire.point_magie }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_illusoire.porte }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_illusoire.duree }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_illusoire.degats }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_illusoire.composants }}</h6>
+                                    <h6 class="card-title">Description du sort:</h6>
+                                    <p class="card-text">{{ magie_illusoire.description_sort }}</p>
+                                    <h6 class="card-title">Description de l'incantation:</h6>
+                                    <p class="card-text">{{ magie_illusoire.incantation }}</p>
+                                    <div class="card-footer text-muted">
+                                        <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_illusoire.apprentissage }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_illusoire.cout_xp }}</h6>
+                                        <a href="{% url 'playeur:editter_sort' pk=magie_illusoire.id %}" class="btn btn-primary">modifier</a>
+                                        <a href="{% url 'playeur:effacer_sort' pk=magie_illusoire.id %}" class="btn btn-danger">supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nom: Magie Demonique
+                        </button>
+                    </h2>
+                
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for magie_demonique in magies_demoniques %}
+                            <div class="card" style="width: 60rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom: {{ magie_demonique.nom }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_demonique.niveau_sort }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_demonique.point_magie }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_demonique.porte }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_demonique.duree }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_demonique.degats }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_demonique.composants }}</h6>
+                                    <h6 class="card-title">Description du sort:</h6>
+                                    <p class="card-text">{{ magie_demonique.description_sort }}</p>
+                                    <h6 class="card-title">Description de l'incantation:</h6>
+                                    <p class="card-text">{{ magie_demonique.incantation }}</p>
+                                    <div class="card-footer text-muted">
+                                        <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_demonique.apprentissage }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_demonique.cout_xp }}</h6>
+                                        <a href="{% url 'playeur:editter_sort' pk=magie_demonique.id %}" class="btn btn-primary">modifier</a>
+                                        <a href="{% url 'playeur:effacer_sort' pk=magie_demonique.id %}" class="btn btn-danger">supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nom: Magie Necromantique
+                        </button>
+                    </h2>
+                
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for magie_necromantique in magies_necromantiques %}
+                            <div class="card" style="width: 60rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom: {{ magie_necromantique.nom }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_necromantique.niveau_sort }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_necromantique.point_magie }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_necromantique.porte }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_necromantique.duree }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_necromantique.degats }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_necromantique.composants }}</h6>
+                                    <h6 class="card-title">Description du sort:</h6>
+                                    <p class="card-text">{{ magie_necromantique.description_sort }}</p>
+                                    <h6 class="card-title">Description de l'incantation:</h6>
+                                    <p class="card-text">{{ magie_necromantique.incantation }}</p>
+                                    <div class="card-footer text-muted">
+                                        <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_necromantique.apprentissage }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_necromantique.cout_xp }}</h6>
+                                        <a href="{% url 'playeur:editter_sort' pk=magie_necromantique.id %}" class="btn btn-primary">modifier</a>
+                                        <a href="{% url 'playeur:effacer_sort' pk=magie_necromantique.id %}" class="btn btn-danger">supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nom: Magie Autre
+                        </button>
+                    </h2>
+                
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for magie_autre in magies_autres %}
+                            <div class="card" style="width: 60rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nom: {{ magie_autre.nom }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_autre.niveau_sort }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_autre.point_magie }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_autre.porte }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_autre.duree }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_autre.degats }}</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_autre.composants }}</h6>
+                                    <h6 class="card-title">Description du sort:</h6>
+                                    <p class="card-text">{{ magie_autre.description_sort }}</p>
+                                    <h6 class="card-title">Description de l'incantation:</h6>
+                                    <p class="card-text">{{ magie_autre.incantation }}</p>
+                                    <div class="card-footer text-muted">
+                                        <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_autre.apprentissage }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_autre.cout_xp }}</h6>
+                                        <a href="{% url 'playeur:editter_sort' pk=magie_autre.id %}" class="btn btn-primary">modifier</a>
+                                        <a href="{% url 'playeur:effacer_sort' pk=magie_autre.id %}" class="btn btn-danger">supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Nom: Magie Bataille
-                </button>
-            </h2>
-        
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {% for magie_bataille in magies_batailles %}
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom: {{ magie_bataille.nom }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_bataille.niveau_sort }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_bataille.point_magie }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_bataille.porte }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_bataille.duree }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_bataille.degats }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_bataille.composants }}</h6>
-                            <h6 class="card-title">Description du sort:</h6>
-                            <p class="card-text">{{ magie_bataille.description_sort }}</p>
-                            <h6 class="card-title">Description de l'incantation:</h6>
-                            <p class="card-text">{{ magie_bataille.incantation }}</p>
-                            <div class="card-footer text-muted">
-                                <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_bataille.apprentissage }}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_bataille.cout_xp }}</h6>
-                                <a href="{% url 'playeur:editter_sort' pk=magie_bataille.id %}" class="btn btn-primary">modifier</a>
-                                <a href="{% url 'playeur:effacer_sort' pk=magie_bataille.id %}" class="btn btn-danger">supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Nom: Magie Druidique
-                </button>
-            </h2>
-        
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {% for magie_druidique in magies_druidiques %}
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom: {{ magie_druidique.nom }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_druidique.niveau_sort }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_druidique.point_magie }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_druidique.porte }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_druidique.duree }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_druidique.degats }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_druidique.composants }}</h6>
-                            <h6 class="card-title">Description du sort:</h6>
-                            <p class="card-text">{{ magie_druidique.description_sort }}</p>
-                            <h6 class="card-title">Description de l'incantation:</h6>
-                            <p class="card-text">{{ magie_druidique.incantation }}</p>
-                            <div class="card-footer text-muted">
-                                <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_druidique.apprentissage }}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_druidique.cout_xp }}</h6>
-                                <a href="{% url 'playeur:editter_sort' pk=magie_druidique.id %}" class="btn btn-primary">modifier</a>
-                                <a href="{% url 'playeur:effacer_sort' pk=magie_druidique.id %}" class="btn btn-danger">supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Nom: Magie Elementaire
-                </button>
-            </h2>
-        
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {% for magie_elementaire in magies_elementaires %}
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom: {{ magie_elementaire.nom }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_elementaire.niveau_sort }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_elementaire.point_magie }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_elementaire.porte }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_elementaire.duree }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_elementaire.degats }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_elementaire.composants }}</h6>
-                            <h6 class="card-title">Description du sort:</h6>
-                            <p class="card-text">{{ magie_elementaire.description_sort }}</p>
-                            <h6 class="card-title">Description de l'incantation:</h6>
-                            <p class="card-text">{{ magie_elementaire.incantation }}</p>
-                            <div class="card-footer text-muted">
-                                <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_elementaire.apprentissage }}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_elementaire.cout_xp }}</h6>
-                                <a href="{% url 'playeur:editter_sort' pk=magie_elementaire.id %}" class="btn btn-primary">modifier</a>
-                                <a href="{% url 'playeur:effacer_sort' pk=magie_elementaire.id %}" class="btn btn-danger">supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Nom: Magie Illusoire
-                </button>
-            </h2>
-        
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {% for magie_illusoire in magies_illusoires %}
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom: {{ magie_illusoire.nom }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_illusoire.niveau_sort }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_illusoire.point_magie }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_illusoire.porte }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_illusoire.duree }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_illusoire.degats }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_illusoire.composants }}</h6>
-                            <h6 class="card-title">Description du sort:</h6>
-                            <p class="card-text">{{ magie_illusoire.description_sort }}</p>
-                            <h6 class="card-title">Description de l'incantation:</h6>
-                            <p class="card-text">{{ magie_illusoire.incantation }}</p>
-                            <div class="card-footer text-muted">
-                                <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_illusoire.apprentissage }}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_illusoire.cout_xp }}</h6>
-                                <a href="{% url 'playeur:editter_sort' pk=magie_illusoire.id %}" class="btn btn-primary">modifier</a>
-                                <a href="{% url 'playeur:effacer_sort' pk=magie_illusoire.id %}" class="btn btn-danger">supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Nom: Magie Demonique
-                </button>
-            </h2>
-        
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {% for magie_demonique in magies_demoniques %}
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom: {{ magie_demonique.nom }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_demonique.niveau_sort }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_demonique.point_magie }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_demonique.porte }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_demonique.duree }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_demonique.degats }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_demonique.composants }}</h6>
-                            <h6 class="card-title">Description du sort:</h6>
-                            <p class="card-text">{{ magie_demonique.description_sort }}</p>
-                            <h6 class="card-title">Description de l'incantation:</h6>
-                            <p class="card-text">{{ magie_demonique.incantation }}</p>
-                            <div class="card-footer text-muted">
-                                <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_demonique.apprentissage }}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_demonique.cout_xp }}</h6>
-                                <a href="{% url 'playeur:editter_sort' pk=magie_demonique.id %}" class="btn btn-primary">modifier</a>
-                                <a href="{% url 'playeur:effacer_sort' pk=magie_demonique.id %}" class="btn btn-danger">supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Nom: Magie Necromantique
-                </button>
-            </h2>
-        
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {% for magie_necromantique in magies_necromantiques %}
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom: {{ magie_necromantique.nom }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_necromantique.niveau_sort }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_necromantique.point_magie }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_necromantique.porte }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_necromantique.duree }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_necromantique.degats }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_necromantique.composants }}</h6>
-                            <h6 class="card-title">Description du sort:</h6>
-                            <p class="card-text">{{ magie_necromantique.description_sort }}</p>
-                            <h6 class="card-title">Description de l'incantation:</h6>
-                            <p class="card-text">{{ magie_necromantique.incantation }}</p>
-                            <div class="card-footer text-muted">
-                                <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_necromantique.apprentissage }}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_necromantique.cout_xp }}</h6>
-                                <a href="{% url 'playeur:editter_sort' pk=magie_necromantique.id %}" class="btn btn-primary">modifier</a>
-                                <a href="{% url 'playeur:effacer_sort' pk=magie_necromantique.id %}" class="btn btn-danger">supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Nom: Magie Autre
-                </button>
-            </h2>
-        
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {% for magie_autre in magies_autres %}
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Nom: {{ magie_autre.nom }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Niveau: {{ magie_autre.niveau_sort }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Point de magie: {{ magie_autre.point_magie }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Portée: {{ magie_autre.porte }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Durée: {{ magie_autre.duree }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Dégats: {{ magie_autre.degats }}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">Composants: {{ magie_autre.composants }}</h6>
-                            <h6 class="card-title">Description du sort:</h6>
-                            <p class="card-text">{{ magie_autre.description_sort }}</p>
-                            <h6 class="card-title">Description de l'incantation:</h6>
-                            <p class="card-text">{{ magie_autre.incantation }}</p>
-                            <div class="card-footer text-muted">
-                                <h6 class="card-subtitle mb-2 text-muted">Lieu d'apprentissage: {{ magie_autre.apprentissage }}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">Cout en XP: {{ magie_autre.cout_xp }}</h6>
-                                <a href="{% url 'playeur:editter_sort' pk=magie_autre.id %}" class="btn btn-primary">modifier</a>
-                                <a href="{% url 'playeur:effacer_sort' pk=magie_autre.id %}" class="btn btn-danger">supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
+{% endif %}
 {% endblock %}  

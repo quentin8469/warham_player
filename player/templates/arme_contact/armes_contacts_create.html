@@ -2,20 +2,22 @@
 {% load static %}
 
 {% block content %}
-<form enctype="multipart/form-data" action="" method="POST">
-    {% csrf_token %}
+{% if user.is_authenticated %}
+    <form enctype="multipart/form-data" action="" method="POST">
+        {% csrf_token %}
 
-</form>
-<div class="container mt-5">
-    <h1> {{user.username.upper}} vous souhaitez créer armes de contacts pour votre personnage</h1>
-    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
-    {% csrf_token %}
-        <p> Création armes de contacts </p>
-            <table class="add-new-ticket">
-                {{form.as_table}}
-            </table>
-            <input class="valid-ticket"type="submit" value="Validez votre armes de contacts">
     </form>
-    <a class="" href="{% url 'playeur:details_personnage' pk=player.id%}" >Retour page profil</a>
-</div>
-{% endblock %}  
+    <div class="container mt-5">
+        <h1> {{user.username.upper}} vous souhaitez créer armes de contacts pour votre personnage</h1>
+        <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+        {% csrf_token %}
+            <p> Création armes de contacts </p>
+                <table class="add-new-ticket">
+                    {{form.as_table}}
+                </table>
+                <input class="valid-ticket"type="submit" value="Validez votre armes de contacts">
+        </form>
+        <a class="" href="{% url 'playeur:details_personnage' pk=player.id%}" >Retour page profil</a>
+    </div>
+{% endif %}
+{% endblock %}   

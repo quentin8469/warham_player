@@ -2,14 +2,16 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1> {{user.username.upper}} vous souhaitez effacer  votre piece d'équipement</h1>
-    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
-    {% csrf_token %}
-        
-        <p>Voulez-vous supprimer cette piece d'équipement: {{ equipement.nom }} ? </p> 
-            <input class="valid-ticket"type="submit" value="Validez la suppression de cette piece d'équipement">
-    </form>
-    <a class="" href="{% url 'playeur:equipements' pk=equipement.player.id %}" >Retour page equipements</a>
-</div>
+{% if user.is_authenticated %}
+    <div class="container mt-5">
+        <h1> {{user.username.upper}} vous souhaitez effacer  votre piece d'équipement</h1>
+        <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+        {% csrf_token %}
+            
+            <p>Voulez-vous supprimer cette piece d'équipement: {{ equipement.nom }} ? </p> 
+                <input class="valid-ticket"type="submit" value="Validez la suppression de cette piece d'équipement">
+        </form>
+        <a class="" href="{% url 'playeur:equipements' pk=equipement.player.id %}" >Retour page equipements</a>
+    </div>
+{% endif %}
 {% endblock %}  

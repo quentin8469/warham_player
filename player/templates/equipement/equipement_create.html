@@ -2,17 +2,18 @@
 {% load static %}
 
 {% block content %}
-
-<div class="container mt-5">
-    <h1> {{user.username.upper}} vous souhaitez ajouter un nouvel equipement à votre personnage</h1>
-    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
-    {% csrf_token %}
-        <p> Création equipement </p>
-            <table class="add-new-ticket">
-                {{form.as_table}}
-            </table>
-            <input class="valid-ticket"type="submit" value="Validez votre equipement">
-    </form>
-    <a class="" href="{% url 'playeur:equipements' pk=player.id%}" >Retour page equipements</a>
-</div>
+{% if user.is_authenticated %}
+    <div class="container mt-5">
+        <h1> {{user.username.upper}} vous souhaitez ajouter un nouvel equipement à votre personnage</h1>
+        <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+        {% csrf_token %}
+            <p> Création equipement </p>
+                <table class="add-new-ticket">
+                    {{form.as_table}}
+                </table>
+                <input class="valid-ticket"type="submit" value="Validez votre equipement">
+        </form>
+        <a class="" href="{% url 'playeur:equipements' pk=player.id%}" >Retour page equipements</a>
+    </div>
+{% endif %}
 {% endblock %}  

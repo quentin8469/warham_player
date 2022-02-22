@@ -2,14 +2,16 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1> {{user.username.upper}} vous souhaitez effacer  votre personnage</h1>
-    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
-    {% csrf_token %}
-        
-        <p>Voulez-vous supprimer ce personnage: {{ player.nom }} ? </p> 
-            <input class="valid-ticket"type="submit" value="Validez la suppression du personnage">
-    </form>
-    <a class="" href="{% url 'playeur:details_personnage' pk=player.id %}" >Retour page profil</a>
-</div>
+{% if user.is_authenticated %}
+    <div class="container mt-5">
+        <h1> {{user.username.upper}} vous souhaitez effacer  votre personnage</h1>
+        <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+        {% csrf_token %}
+            
+            <p>Voulez-vous supprimer ce personnage: {{ player.nom }} ? </p> 
+                <input class="valid-ticket"type="submit" value="Validez la suppression du personnage">
+        </form>
+        <a class="" href="{% url 'playeur:details_personnage' pk=player.id %}" >Retour page profil</a>
+    </div>
+{% endif %}
 {% endblock %}  

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-
+{% if user.is_authenticated %}
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -87,4 +87,5 @@
               </table>
         </div>
     </div>
-  {% endblock %}  
+{% endif %}
+{% endblock %}  

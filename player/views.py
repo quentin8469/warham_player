@@ -39,7 +39,6 @@ from player.forms import (NewPlayerForm,
 
 class PlayerView(ListView):
     model = Player
-    
     template_name = "personnage/player_list.html"
     
     def get_context_data(self, **kwargs):

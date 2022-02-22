@@ -19,14 +19,21 @@
             </a>
     
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              {% if user.is_authenticated %}
               <li><a href="{% url 'playeur:liste_personnages' %}" class="nav-link px-2 text-secondary">Home</a></li>
               <li><a href="{% url 'playeur:creation_personnage' %}" class="nav-link px-2 text-white">Creation de personnage</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">Autre</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Profil Joueur</a></li>
+              {% endif %}
             </ul>            
             
             <div class="text-end">
-              <button type="button" class="btn btn-outline-light me-2">Login</button>
-              <button type="button" class="btn btn-warning">Sign-up</button>
+              <a class="btn btn-primary" aria-current="page" href="{% url 'account:login' %}">Se connecter</a>
+              {% if user.is_authenticated %}
+              <a class="btn btn-danger" aria-current="page" href="{% url 'account:logout' %}">Se déconnecter</a>
+              {% else %}
+              <a class="btn btn-warning" aria-current="page" href="{% url 'account:signup' %}">S'inscrire</a>
+              {% endif %}
+              
             </div>
           </div>
         </div>

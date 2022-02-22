@@ -2,14 +2,16 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1> {{user.username.upper}} vous souhaitez effacer  votre sort</h1>
-    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
-    {% csrf_token %}
-        
-        <p>Voulez-vous supprimer ce sort: {{ sortilege.nom }} ? </p> 
-            <input class="valid-ticket"type="submit" value="Validez la suppression de votre sort">
-    </form>
-    <a class="" href="{% url 'playeur:magie' pk=sortilege.player.id %}" >Retour page magie</a>
-</div>
+{% if user.is_authenticated %}
+    <div class="container mt-5">
+        <h1> {{user.username.upper}} vous souhaitez effacer  votre sort</h1>
+        <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+        {% csrf_token %}
+            
+            <p>Voulez-vous supprimer ce sort: {{ sortilege.nom }} ? </p> 
+                <input class="valid-ticket"type="submit" value="Validez la suppression de votre sort">
+        </form>
+        <a class="" href="{% url 'playeur:magie' pk=sortilege.player.id %}" >Retour page magie</a>
+    </div>
+    {% endif %}   
 {% endblock %}  

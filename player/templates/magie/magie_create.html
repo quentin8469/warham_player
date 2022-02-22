@@ -2,16 +2,18 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1> {{user.username.upper}} vous souhaitez ajouter un sortilege au grimoire de votre personnage</h1>
-    <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
-    {% csrf_token %}
-        <p> Création sortilege </p>
-            <table class="add-new-ticket">
-                {{form.as_table}}
-            </table>
-            <input class="valid-ticket"type="submit" value="Validez votre sortilege">
-    </form>
-    <a class="" href="{% url 'playeur:magie' pk=player.id%}" >Retour page magie</a>
-</div>
+{% if user.is_authenticated %}
+    <div class="container mt-5">
+        <h1> {{user.username.upper}} vous souhaitez ajouter un sortilege au grimoire de votre personnage</h1>
+        <form enctype="multipart/form-data" method="POST" class="post-form border border-dark p-3">
+        {% csrf_token %}
+            <p> Création sortilege </p>
+                <table class="add-new-ticket">
+                    {{form.as_table}}
+                </table>
+                <input class="valid-ticket"type="submit" value="Validez votre sortilege">
+        </form>
+        <a class="" href="{% url 'playeur:magie' pk=player.id%}" >Retour page magie</a>
+    </div>
+{% endif %}
 {% endblock %}  

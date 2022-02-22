@@ -2,51 +2,77 @@
 {% load static %}
 {% block content %}
 
+{% if user.is_authenticated %}
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+            <a class="nav-link " href="{% url 'playeur:details_personnage' pk=player.id %}">Profil</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'playeur:description' pk=player.id %}">Description</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'playeur:magie' pk=player.id %}">Magies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:competences' pk=player.id %}">Competences</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:equipements' pk=player.id %}">Equipements</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'playeur:morts_tuer' pk=player.id %}">Notes & Morts tués</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'playeur:montures' pk=player.id %}">Montures</a>
+            </li>
+        </ul> 
 
-<div class="container">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link " href="{% url 'playeur:details_personnage' pk=player.id %}">Profil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'playeur:description' pk=player.id %}">Description</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'playeur:magie' pk=player.id %}">Magies</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:competences' pk=player.id %}">Competences</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:equipements' pk=player.id %}">Equipements</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'playeur:morts_tuer' pk=player.id %}">Notes & Morts tués</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'playeur:montures' pk=player.id %}">Montures</a>
-        </li>
-    </ul> 
-
-<div class="container">
-    
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Note(s)
-                </button>
-            </h2>
+    <div class="container">
         
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <p class="card-text">{{ player.note }}</p>
-                            <div class="card-footer text-muted">
-                                
-                                <a href="#" class="btn btn-primary">modifier</a>
-                                <a href="#" class="btn btn-primary">supprimer</a>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Note(s)
+                    </button>
+                </h2>
+            
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="card" style="width: 60rem;">
+                            <div class="card-body">
+                                <p class="card-text">{{ player.note }}</p>
+                                <div class="card-footer text-muted">
+                                    
+                                    <a href="#" class="btn btn-primary">modifier</a>
+                                    <a href="#" class="btn btn-primary">supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Mort(s) Tué(s)
+                    </button>
+                </h2>
+            
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="card" style="width: 60rem;">
+                            <div class="card-body">
+                                <p class="card-text">{{ player.mort_tuer }}</p>
+                                <div class="card-footer text-muted">
+                                    
+                                    <a href="#" class="btn btn-primary">modifier</a>
+                                    <a href="#" class="btn btn-primary">supprimer</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -54,31 +80,5 @@
             </div>
         </div>
     </div>
-
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Mort(s) Tué(s)
-                </button>
-            </h2>
-        
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <div class="card" style="width: 60rem;">
-                        <div class="card-body">
-                            <p class="card-text">{{ player.mort_tuer }}</p>
-                            <div class="card-footer text-muted">
-                                
-                                <a href="#" class="btn btn-primary">modifier</a>
-                                <a href="#" class="btn btn-primary">supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+{% endif %}
 {% endblock %}  
