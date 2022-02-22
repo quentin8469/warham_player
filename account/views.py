@@ -1,9 +1,12 @@
+from re import template
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+
 from django.contrib.auth import authenticate, login
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from account.forms import NewUserForm
 from django.contrib.auth.views import LogoutView, LoginView
+
+from account.models import CustomUser
 # Create your views here.
 
 class SignUpView(CreateView):
@@ -37,5 +40,14 @@ def connexion(request):
 
     return render(request, "registration/login.html")
 
-
-
+class UserProfilDetail(DetailView):
+    model = CustomUser
+    context_object_name = "user"
+    template_name = "profil/profil_details.html"
+    
+    def get_context_data(self, **kwargs):
+        context = {}
+        user = CustomUser.object.get(id=self.kwargs['pk'])
+        context['user'] = user
+        
+        return super().get_context_data(**context) # get the default context data

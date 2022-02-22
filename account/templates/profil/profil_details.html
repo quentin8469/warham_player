@@ -1,0 +1,18 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="col-auto">
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" class=""  alt="Image">
+        {% endif %}
+        <p class="p-1 border bg-light">NOM: {{ user.username }}</p>
+        <p class="p-1 border bg-light">Email: {{ user.email}} </p>
+        <p class="p-1 border bg-light">Admin: {{ user.is_staff}} </p>
+        <p class="p-1 border bg-light">Actif: {{ user.is_active}} </p>
+        <p class="p-1 border bg-light">Super User: {{ user.is_superuser}} </p>  
+                           
+    </div>
+{% endif %}
+{% endblock %}  
