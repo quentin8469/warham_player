@@ -22,7 +22,7 @@
               {% if user.is_authenticated %}
               <li><a href="{% url 'playeur:liste_personnages' %}" class="nav-link px-2 text-secondary">Home</a></li>
               <li><a href="{% url 'playeur:creation_personnage' %}" class="nav-link px-2 text-white">Creation de personnage</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">Profil Joueur</a></li>
+              <li><a href="{% url 'account:profil' pk=user.id %}" class="nav-link px-2 text-white">Profil Joueur</a></li>
               {% endif %}
             </ul>            
             
